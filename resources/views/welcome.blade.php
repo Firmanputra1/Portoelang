@@ -4,7 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="ElangDesign - Jasa desain grafis profesional: logo, brosur, company profile, dan website. Hasil premium, harga terjangkau.">
-    <title>ElangDesign - Jasa Desain Grafis Profesional</title>
+    <title>ElangDesign - Jasa Desain Grafis </title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="{{ asset('images/favicon.PNG') }}">
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -23,6 +26,7 @@
             box-sizing: border-box;
             margin: 0;
             padding: 0;
+            transition: background-color 0.4s ease-out, background 0.4s ease-out, color 0.4s ease-out, border-color 0.4s ease-out, fill 0.4s ease-out;
         }
 
         :root {
@@ -46,7 +50,7 @@
             --radius: 16px;
             --radius-sm: 8px;
             --radius-lg: 24px;
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition: all 0.4s ease;
             --nav-bg: transparent;
             --nav-bg-scrolled: rgba(10, 10, 15, 0.9);
             --dropdown-bg: rgba(10, 10, 15, 0.95);
@@ -86,6 +90,7 @@
             color: var(--text-primary);
             overflow-x: hidden;
             line-height: 1.6;
+            transition: background-color 0.4s ease, background 0.4s ease, color 0.4s ease;
         }
 
         /* ===== SCROLLBAR ===== */
@@ -148,8 +153,9 @@
         .logo {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 4px;
             text-decoration: none;
+            margin-left: 16px;
         }
 
         .logo-icon {
@@ -278,10 +284,11 @@
         .hero {
             min-height: 100vh;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 120px 24px 80px;
+            padding: 120px 24px 24px;
             position: relative;
             z-index: 1;
         }
@@ -450,10 +457,7 @@
 
         /* ===== SCROLL INDICATOR ===== */
         .scroll-indicator {
-            position: absolute;
-            bottom: 32px;
-            left: 50%;
-            transform: translateX(-50%);
+            margin-top: 64px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -473,8 +477,8 @@
         }
 
         @keyframes bounce {
-            0%, 100% { transform: translateX(-50%) translateY(0); }
-            50% { transform: translateX(-50%) translateY(8px); }
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(8px); }
         }
 
         /* ===== SECTION BASE ===== */
@@ -534,7 +538,7 @@
 
         /* ===== SERVICES ===== */
         .services {
-            padding: 100px 0;
+            padding: 24px 0 100px 0;
         }
 
         .services-grid {
@@ -669,7 +673,7 @@
 
         /* ===== PORTFOLIO ===== */
         .portfolio {
-            padding: 100px 0;
+            padding: 24px 0 100px 0;
             background: rgba(99,102,241,0.02);
         }
 
@@ -794,7 +798,7 @@
 
         /* ===== PACKAGES ===== */
         .packages {
-            padding: 100px 0;
+            padding: 24px 0 100px 0;
         }
 
         .packages-grid {
@@ -941,7 +945,7 @@
 
         /* ===== TESTIMONIALS ===== */
         .testimonials {
-            padding: 100px 0;
+            padding: 24px 0 100px 0;
             background: rgba(99,102,241,0.02);
         }
 
@@ -1015,7 +1019,7 @@
 
         /* ===== FAQ ===== */
         .faq {
-            padding: 100px 0;
+            padding: 24px 0 100px 0;
         }
 
         .faq-list {
@@ -1089,7 +1093,7 @@
 
         /* ===== CTA SECTION ===== */
         .cta-section {
-            padding: 100px 24px;
+            padding: 24px 24px 100px 24px;
             text-align: center;
         }
 
@@ -1355,6 +1359,20 @@
             }
         }
 
+        /* ===== STRICT MOBILE (Phones) ===== */
+        @media (max-width: 767px) {
+            .logo img {
+                width: 32px !important;
+                height: 32px !important;
+            }
+            .logo-text {
+                font-size: 16px;
+            }
+            .logo {
+                margin-left: 0; /* Reset margin on mobile to align properly */
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -1367,7 +1385,7 @@
 <nav class="navbar" id="navbar">
     <div class="nav-inner">
         <a href="{{ route('home') }}" class="logo">
-            <div class="logo-icon">E</div>
+            <img src="{{ asset('images/logoelang.SVG') }}" alt="ElangDesign Logo" width="40" height="40">
             <span class="logo-text">ElangDesign</span>
         </a>
         <ul class="nav-links" id="navLinks">
@@ -1408,10 +1426,10 @@
             Dipercaya 500+ klien di seluruh Indonesia
         </div>
         <h1>
-            {{ $settings['hero_title'] ?? 'Wujudkan Brand' }}<br>
+            Wujudkan Brand<br>
             <span class="gradient-text">Impian Anda</span>
         </h1>
-        <p>{{ $settings['hero_subtitle'] ?? 'Jasa desain grafis profesional untuk logo, brosur, company profile & website yang memukau.' }}</p>
+        <p>Jasa desain grafis profesional untuk logo, brosur, company profile & website yang memukau.</p>
         <div class="hero-cta">
             <a href="#services" class="btn-primary">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -1537,9 +1555,9 @@
                 $emojis = ['🎨', '✏️', '💼', '💻', '📱', '⭐', '🖼️', '🎯', '🚀'];
             @endphp
             @forelse($portfolios as $index => $item)
-            <div class="portfolio-item animate-on-scroll" 
+            <div class="portfolio-item animate-on-scroll {{ $index > 2 ? 'portfolio-hidden' : '' }}" 
                  data-category="{{ $item->category }}"
-                 style="transition-delay: {{ ($index % 3) * 0.1 }}s">
+                 style="transition-delay: {{ ($index % 3) * 0.1 }}s; {{ $index > 2 ? 'display: none;' : '' }}">
                 <div class="portfolio-img" style="background: linear-gradient(135deg, {{ $colors[$index % count($colors)] }})">
                     <div class="portfolio-placeholder">{{ $emojis[$index % count($emojis)] }}</div>
                     <div class="portfolio-overlay">
@@ -1566,13 +1584,13 @@
             @endforelse
         </div>
 
-        <div style="text-align:center; margin-top: 48px;" class="animate-on-scroll">
-            <a href="#portfolio" class="btn-secondary">
-                Lihat Semua Portfolio
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <div id="portfolioToggleContainer" style="text-align:center; margin-top: 48px;" class="animate-on-scroll">
+            <button id="togglePortfolioBtn" class="btn-secondary" style="border: none; cursor: pointer; font-family: inherit;">
+                <span id="togglePortfolioText">Lihat Semua Portfolio</span>
+                <svg id="togglePortfolioIcon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="transition: transform 0.3s ease;">
                     <path d="M5 12h14M12 5l7 7-7 7"/>
                 </svg>
-            </a>
+            </button>
         </div>
     </div>
 </section>
@@ -1728,11 +1746,10 @@
     <div class="footer-inner">
         <div class="footer-top">
             <div class="footer-brand">
-                <a href="{{ route('home') }}" class="logo">
-                    <div class="logo-icon">E</div>
+                <a href="{{ route('home') }}" class="logo" style="margin-left: 0;">
                     <span class="logo-text">ElangDesign</span>
                 </a>
-                <p>{{ $settings['description'] ?? 'ElangDesign hadir untuk membantu bisnis Anda tampil profesional dengan desain berkualitas tinggi.' }}</p>
+                <p>ElangDesign hadir untuk membantu bisnis Anda tampil profesional dengan desain menarik dan tentunya berkualitas tinggi.</p>
                 <div class="footer-social">
                     <a href="{{ $settings['instagram_url'] ?? '#' }}" class="social-btn" target="_blank" aria-label="Instagram">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
@@ -1740,7 +1757,7 @@
                     <a href="https://wa.me/6285385794598" class="social-btn" target="_blank" aria-label="WhatsApp">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
                     </a>
-                    <a href="mailto:{{ $settings['email'] ?? 'hello@elangdesign.com' }}" class="social-btn" aria-label="Email">
+                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=elangdesign@gmail.com" target="_blank" class="social-btn" aria-label="Email">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
                     </a>
                 </div>
@@ -1762,16 +1779,16 @@
                     <li><a href="#packages">Paket Harga</a></li>
                     <li><a href="#testimonials">Testimoni</a></li>
                     <li><a href="#faq">FAQ</a></li>
-                    <li><a href="{{ route('contact') }}">Kontak</a></li>
+                    <li><a href="#contact">Kontak</a></li>
                 </ul>
             </div>
         </div>
         <div class="footer-bottom">
-            <p class="footer-copy">© {{ date('Y') }} ElangDesign. Dibuat dengan ❤️ untuk klien Indonesia.</p>
-            <p class="footer-copy">Email: <a href="mailto:{{ $settings['email'] ?? 'hello@elangdesign.com' }}">{{ $settings['email'] ?? 'hello@elangdesign.com' }}</a></p>
+            <p class="footer-copy">© {{ date('Y') }} ElangDesign. Dibuat dengan hati dan profesionalitas tinggi.</p>
+            <p class="footer-copy">Email: elangdesign@gmail.com</p>
         </div>
     </div>
-</footer>
+</footer> 
 
 <script>
     // ===== PARTICLES =====
@@ -1926,28 +1943,70 @@
     }
 
     // ===== PORTFOLIO FILTER =====
+    // ===== PORTFOLIO TOGGLE & FILTER =====
     const filterBtns = document.querySelectorAll('.filter-btn');
     const portfolioItems = document.querySelectorAll('.portfolio-item');
+    const toggleBtn = document.getElementById('togglePortfolioBtn');
+    const toggleText = document.getElementById('togglePortfolioText');
+    const toggleIcon = document.getElementById('togglePortfolioIcon');
+    const toggleContainer = document.getElementById('portfolioToggleContainer');
+    let isExpanded = false;
+
+    if(toggleBtn) {
+        toggleBtn.addEventListener('click', () => {
+            isExpanded = !isExpanded;
+            document.querySelectorAll('.portfolio-hidden').forEach(item => {
+                if (isExpanded) {
+                    item.style.display = '';
+                    setTimeout(() => { item.style.opacity = '1'; item.style.transform = 'scale(1)'; }, 50);
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+            
+            if (isExpanded) {
+                toggleText.textContent = 'Tampilkan Lebih Sedikit';
+                toggleIcon.style.transform = 'rotate(180deg)';
+            } else {
+                toggleText.textContent = 'Lihat Semua Portfolio';
+                toggleIcon.style.transform = 'rotate(0deg)';
+                const portfolioSec = document.getElementById('portfolio');
+                const top = portfolioSec.getBoundingClientRect().top + window.pageYOffset - 80;
+                window.scrollTo({ top, behavior: 'smooth' });
+            }
+        });
+    }
 
     filterBtns.forEach(btn => {
         btn.addEventListener('click', () => {
             filterBtns.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
             const filter = btn.dataset.filter;
+            
             portfolioItems.forEach(item => {
+                const isHiddenByCollapse = !isExpanded && item.classList.contains('portfolio-hidden');
+                
                 if (filter === 'all' || item.dataset.category === filter) {
-                    item.style.display = '';
-                    item.style.opacity = '0';
-                    item.style.transform = 'scale(0.9)';
-                    setTimeout(() => {
-                        item.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
-                        item.style.opacity = '1';
-                        item.style.transform = 'scale(1)';
-                    }, 50);
+                    if (filter === 'all' && isHiddenByCollapse) {
+                        item.style.display = 'none';
+                    } else {
+                        item.style.display = '';
+                        item.style.opacity = '0';
+                        item.style.transform = 'scale(0.9)';
+                        setTimeout(() => {
+                            item.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+                            item.style.opacity = '1';
+                            item.style.transform = 'scale(1)';
+                        }, 50);
+                    }
                 } else {
                     item.style.display = 'none';
                 }
             });
+
+            if (toggleContainer) {
+                toggleContainer.style.display = filter === 'all' ? 'block' : 'none';
+            }
         });
     });
 
