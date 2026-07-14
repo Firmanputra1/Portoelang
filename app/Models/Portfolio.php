@@ -10,8 +10,13 @@ class Portfolio extends Model
     use HasFactory;
 
     protected $fillable = [
-        'title', 'category', 'image', 'client_name', 'description', 'is_active', 'sort_order'
+        'title', 'service_id', 'category', 'image', 'client_name', 'description', 'is_active', 'sort_order'
     ];
+
+    public function service()
+    {
+        return $this->belongsTo(Service::class);
+    }
 
     protected $casts = [
         'is_active' => 'boolean',

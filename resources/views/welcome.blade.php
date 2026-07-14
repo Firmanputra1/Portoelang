@@ -1359,6 +1359,32 @@
             }
         }
 
+        .admin-login-btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            color: var(--text-muted);
+            font-size: 13px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .admin-login-btn:hover {
+            background: var(--gradient);
+            border-color: transparent;
+            color: white;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+            transform: translateY(-2px);
+        }
+
+        html.light-mode .admin-login-btn {
+            background: rgba(0, 0, 0, 0.02);
+        }
+
         /* ===== STRICT MOBILE (Phones) ===== */
         @media (max-width: 767px) {
             .logo img {
@@ -1784,8 +1810,15 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p class="footer-copy">© {{ date('Y') }} ElangDesign. Dibuat dengan hati dan profesionalitas tinggi.</p>
-            <p class="footer-copy">Email: elangdesign@gmail.com</p>
+            <div>
+                <p class="footer-copy">© {{ date('Y') }} ElangDesign. Dibuat dengan hati dan profesionalitas tinggi.</p>
+                <p class="footer-copy">Email: elangdesign@gmail.com</p>
+            </div>
+            <div>
+                <a href="{{ route('login') }}" class="admin-login-btn" title="Login Admin">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 6px; vertical-align: middle;"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg> Login Admin
+                </a>
+            </div>
         </div>
     </div>
 </footer> 

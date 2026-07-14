@@ -302,5 +302,14 @@ class DatabaseSeeder extends Seeder
         foreach ($portfolios as $p) {
             Portfolio::updateOrCreate(['title' => $p['title']], $p);
         }
+
+        // Create Default Admin User
+        \App\Models\User::updateOrCreate(
+            ['email' => 'admin@elangdesign.com'],
+            [
+                'name' => 'Admin ElangDesign',
+                'password' => \Illuminate\Support\Facades\Hash::make('password'),
+            ]
+        );
     }
 }

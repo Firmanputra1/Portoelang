@@ -23,17 +23,13 @@ class TestimonialController extends Controller
     {
         $data = $request->validate([
             'name' => 'required|string|max:255',
-            'company' => 'nullable|string|max:255',
-            'message' => 'required|string',
+            'position' => 'nullable|string|max:255',
+            'content' => 'required|string',
             'rating' => 'required|integer|min:1|max:5',
-            'avatar' => 'nullable|image|max:1024',
+            'sort_order' => 'nullable|integer',
         ]);
 
         $data['is_active'] = $request->has('is_active');
-
-        if ($request->hasFile('avatar')) {
-            $data['avatar'] = $request->file('avatar')->store('testimonials', 'public');
-        }
 
         Testimonial::create($data);
         return redirect()->route('admin.testimonials.index')->with('success', 'Testimoni berhasil ditambahkan!');
@@ -48,17 +44,13 @@ class TestimonialController extends Controller
     {
         $data = $request->validate([
             'name' => 'required|string|max:255',
-            'company' => 'nullable|string|max:255',
-            'message' => 'required|string',
+            'position' => 'nullable|string|max:255',
+            'content' => 'required|string',
             'rating' => 'required|integer|min:1|max:5',
-            'avatar' => 'nullable|image|max:1024',
+            'sort_order' => 'nullable|integer',
         ]);
 
         $data['is_active'] = $request->has('is_active');
-
-        if ($request->hasFile('avatar')) {
-            $data['avatar'] = $request->file('avatar')->store('testimonials', 'public');
-        }
 
         $testimonial->update($data);
         return redirect()->route('admin.testimonials.index')->with('success', 'Testimoni berhasil diperbarui!');
