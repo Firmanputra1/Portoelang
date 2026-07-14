@@ -10,7 +10,7 @@ class TestimonialController extends Controller
 {
     public function index()
     {
-        $testimonials = Testimonial::orderBy('sort_order')->get();
+        $testimonials = Testimonial::latest()->get();
         return view('admin.testimonials.index', compact('testimonials'));
     }
 
@@ -23,13 +23,17 @@ class TestimonialController extends Controller
     {
         $data = $request->validate([
             'name' => 'required|string|max:255',
-            'position' => 'nullable|string|max:255',
-            'content' => 'required|string',
+            'company' => 'nullable|string|max:255',
+            'message' => 'required|string',
             'rating' => 'required|integer|min:1|max:5',
-            'sort_order' => 'nullable|integer',
+            'avatar' => 'nullable|image|max:1024',
         ]);
 
         $data['is_active'] = $request->has('is_active');
+
+        if ($request->hasFile('avatar')) {
+            $data['avatar'] = $request->file('avatar')->store('testimonials', 'public');
+        }
 
         Testimonial::create($data);
         return redirect()->route('admin.testimonials.index')->with('success', 'Testimoni berhasil ditambahkan!');
@@ -44,13 +48,17 @@ class TestimonialController extends Controller
     {
         $data = $request->validate([
             'name' => 'required|string|max:255',
-            'position' => 'nullable|string|max:255',
-            'content' => 'required|string',
+            'company' => 'nullable|string|max:255',
+            'message' => 'required|string',
             'rating' => 'required|integer|min:1|max:5',
-            'sort_order' => 'nullable|integer',
+            'avatar' => 'nullable|image|max:1024',
         ]);
 
         $data['is_active'] = $request->has('is_active');
+
+        if ($request->hasFile('avatar')) {
+            $data['avatar'] = $request->file('avatar')->store('testimonials', 'public');
+        }
 
         $testimonial->update($data);
         return redirect()->route('admin.testimonials.index')->with('success', 'Testimoni berhasil diperbarui!');
