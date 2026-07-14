@@ -15,6 +15,15 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
+        // Admin User
+        \App\Models\User::updateOrCreate(
+            ['email' => 'admin@elangdesign.com'],
+            [
+                'name' => 'Admin ElangDesign',
+                'password' => \Hash::make('password'),
+            ]
+        );
+
         // Settings
         $settings = [
             ['key' => 'whatsapp_number', 'value' => '6281234567890'],

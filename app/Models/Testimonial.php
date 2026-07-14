@@ -9,7 +9,7 @@ class Testimonial extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'company', 'message', 'rating', 'avatar', 'is_active'];
+    protected $fillable = ['name', 'position', 'content', 'rating', 'sort_order', 'is_active'];
 
     protected $casts = ['is_active' => 'boolean', 'rating' => 'integer'];
 
