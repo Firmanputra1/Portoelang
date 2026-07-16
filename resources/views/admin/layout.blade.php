@@ -73,17 +73,11 @@
             margin-bottom: 36px;
         }
 
-        .brand-icon {
-            width: 32px;
-            height: 32px;
-            background: var(--gradient);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 800;
-            color: white;
-            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+        .brand-icon-img {
+            height: 36px;
+            width: auto;
+            max-width: 100%;
+            object-fit: contain;
         }
 
         .brand-text {
@@ -443,7 +437,7 @@
     <!-- Sidebar -->
     <aside class="sidebar" id="sidebar">
         <a href="{{ route('admin.dashboard') }}" class="sidebar-brand">
-            <div class="brand-icon">E</div>
+            <img src="{{ asset('images/logoelang.svg') }}" alt="ElangDesign Logo" class="brand-icon-img">
             <span class="brand-text">ElangDesign</span>
         </a>
 

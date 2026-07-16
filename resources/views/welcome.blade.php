@@ -266,19 +266,74 @@
         .hamburger {
             display: none;
             flex-direction: column;
+            justify-content: center;
+            align-items: center;
             gap: 5px;
             cursor: pointer;
             background: none;
             border: none;
-            padding: 4px;
+            padding: 8px;
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+            transition: background 0.3s ease;
+            z-index: 1100;
         }
 
+        .hamburger:hover { background: rgba(99,102,241,0.1); }
+
+        /* Ripple saat klik */
+        .hamburger::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 10px;
+            background: rgba(99,102,241,0.25);
+            transform: scale(0);
+            opacity: 1;
+            transition: transform 0.4s ease, opacity 0.4s ease;
+        }
+        .hamburger.ripple::after { transform: scale(1); opacity: 0; }
+
         .hamburger span {
-            width: 24px; height: 2px;
+            display: block;
+            height: 2px;
             background: var(--text-primary);
             border-radius: 2px;
-            transition: var(--transition);
+            transform-origin: center;
+            transition:
+                transform  0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity    0.25s ease,
+                width      0.3s  ease,
+                background 0.3s  ease;
         }
+        .hamburger span:nth-child(1) { width: 22px; }
+        .hamburger span:nth-child(2) { width: 15px; }
+        .hamburger span:nth-child(3) { width: 22px; }
+
+        .hamburger:hover span { background: var(--primary-light); }
+        .hamburger:hover span:nth-child(2) { width: 22px; }
+
+        /* Pop saat toggle */
+        .hamburger.active {
+            position: fixed;
+            top: 16px;
+            right: 24px;
+            z-index: 1100;
+            background: rgba(99,102,241,0.12);
+            animation: hamPop 0.35s cubic-bezier(0.34,1.56,0.64,1) both;
+        }
+        @keyframes hamPop {
+            0%   { transform: scale(1); }
+            40%  { transform: scale(1.18); }
+            100% { transform: scale(1); }
+        }
+
+        /* Morph ke X */
+        .hamburger.active span               { background: var(--primary-light); }
+        .hamburger.active span:nth-child(1)  { width: 22px; transform: translateY(7px) rotate(45deg); }
+        .hamburger.active span:nth-child(2)  { opacity: 0;  transform: scaleX(0); }
+        .hamburger.active span:nth-child(3)  { width: 22px; transform: translateY(-7px) rotate(-45deg); }
 
         /* ===== HERO ===== */
         .hero {
@@ -1287,47 +1342,117 @@
         }
 
         /* ===== MOBILE & TABLET ===== */
-        @media (max-width: 991px) {
-            .nav-links { display: none; }
+        @media (max-width: 1024px) {
             .hamburger { display: flex; }
             .desktop-only { display: none !important; }
             .mobile-only { display: block; width: 100%; margin-top: 10px; }
 
-            .nav-links.open {
+            /* Base state: tersembunyi tapi di DOM agar bisa dianimasikan */
+            .nav-links {
                 display: flex;
                 flex-direction: column;
-                position: absolute;
-                top: calc(100% + 10px); right: 24px; left: auto;
-                width: 280px;
-                max-width: calc(100vw - 48px);
+                position: fixed;
+                top: 0; right: 0; bottom: 0;
+                width: min(230px, 60vw);
+                height: 100vh;
                 background: var(--dropdown-bg);
-                backdrop-filter: blur(10px);
-                -webkit-backdrop-filter: blur(10px);
-                padding: 20px;
-                border: 1px solid var(--border);
-                border-radius: var(--radius);
-                gap: 16px;
-                max-height: 50vh;
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+                padding: 70px 16px 40px;
+                border: none;
+                border-left: 1px solid var(--border);
+                border-top-left-radius: 24px;
+                border-bottom-left-radius: 24px;
+                gap: 8px;
+                max-height: none;
                 overflow-y: auto;
-                box-shadow: var(--shadow-card);
+                box-shadow: none;
+                z-index: 1000;
+                /* Animasi: tersembunyi ke kanan */
+                opacity: 0;
+                visibility: hidden;
+                transform: translateX(100%);
+                transform-origin: right center;
+                transition:
+                    opacity    0.35s ease,
+                    transform  0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                    visibility 0s    0.35s;
+                pointer-events: none;
             }
 
+            /* State terbuka */
+            .nav-links.open {
+                opacity: 1;
+                visibility: visible;
+                transform: translateX(0);
+                pointer-events: auto;
+                box-shadow: -10px 0 40px rgba(0, 0, 0, 0.25);
+                transition:
+                    opacity    0.35s ease,
+                    transform  0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                    visibility 0s    0s;
+            }
+
+            /* Premium Link Style di Sidebar */
+            .nav-links a {
+                padding: 12px 18px;
+                width: 100%;
+                border-radius: 12px;
+                display: inline-flex;
+                align-items: center;
+                font-size: 16px;
+                color: var(--text-secondary);
+                transition: var(--transition);
+                border: 1px solid transparent;
+            }
+
+            .nav-links a::after {
+                display: none;
+            }
+
+            .nav-links a:hover {
+                background: rgba(99, 102, 241, 0.08);
+                color: var(--primary-light);
+                border-color: rgba(99, 102, 241, 0.15);
+                transform: translateX(-4px);
+            }
+
+            /* Stagger tiap item saat muncul */
+            .nav-links > li {
+                opacity: 0;
+                transform: translateX(20px);
+                transition: opacity 0.3s ease, transform 0.3s ease;
+            }
+            .nav-links.open > li:nth-child(1) { opacity:1; transform:none; transition-delay: 0.1s; }
+            .nav-links.open > li:nth-child(2) { opacity:1; transform:none; transition-delay: 0.15s; }
+            .nav-links.open > li:nth-child(3) { opacity:1; transform:none; transition-delay: 0.2s; }
+            .nav-links.open > li:nth-child(4) { opacity:1; transform:none; transition-delay: 0.25s; }
+            .nav-links.open > li:nth-child(5) { opacity:1; transform:none; transition-delay: 0.3s; }
+            .nav-links.open > li:nth-child(6) { opacity:1; transform:none; transition-delay: 0.35s; }
+
+            /* Overlay dengan fade in/out */
             .menu-overlay {
                 position: fixed;
                 top: 0; left: 0; right: 0; bottom: 0;
-                background: var(--overlay-bg);
-                backdrop-filter: blur(3px);
-                -webkit-backdrop-filter: blur(3px);
-                z-index: 998;
+                background: rgba(10, 10, 15, 0.4);
+                z-index: 999;
                 opacity: 0;
                 visibility: hidden;
-                transition: opacity 0.3s ease, visibility 0.3s ease;
+                transition: opacity 0.25s ease, visibility 0s 0.25s;
                 pointer-events: none;
+            }
+
+            html.light-mode .menu-overlay {
+                background: rgba(255, 255, 255, 0.4);
             }
 
             .menu-overlay.show {
                 opacity: 1;
                 visibility: visible;
+                pointer-events: auto;
+                transition: opacity 0.25s ease, visibility 0s 0s;
+                backdrop-filter: blur(4px);
+                -webkit-backdrop-filter: blur(4px);
             }
 
             .services-grid,
@@ -1352,6 +1477,11 @@
 
             .hero-stats {
                 gap: 32px;
+            }
+
+            .hero {
+                min-height: auto;
+                padding: 120px 24px 60px;
             }
 
             .cta-box {
@@ -1898,24 +2028,52 @@
     const hamburger = document.getElementById('hamburger');
     const navLinks = document.getElementById('navLinks');
     const menuOverlay = document.getElementById('menuOverlay');
+
+    function closeNav() {
+        navLinks.classList.remove('open');
+        hamburger.classList.remove('active');
+        if (menuOverlay) menuOverlay.classList.remove('show');
+    }
+
     hamburger.addEventListener('click', () => {
+        // Ripple + active class
+        hamburger.classList.add('ripple');
+        setTimeout(() => hamburger.classList.remove('ripple'), 420);
+        hamburger.classList.toggle('active');
+
         navLinks.classList.toggle('open');
         if(menuOverlay) menuOverlay.classList.toggle('show');
     });
 
     // Close mobile menu on link click
     document.querySelectorAll('.nav-links a').forEach(link => {
-        link.addEventListener('click', () => {
-            navLinks.classList.remove('open');
-            if(menuOverlay) menuOverlay.classList.remove('show');
-        });
+        link.addEventListener('click', closeNav);
     });
 
-    // Close mobile menu when clicking outside (e.g. on the overlay or other elements)
+    // Klik overlay → tutup nav
+    if (menuOverlay) {
+        menuOverlay.addEventListener('click', closeNav);
+
+        // Forward scroll agar background tetap bisa discroll
+        menuOverlay.addEventListener('wheel', (e) => {
+            window.scrollBy({ top: e.deltaY, left: e.deltaX, behavior: 'instant' });
+        }, { passive: true });
+
+        let _touchY = 0;
+        menuOverlay.addEventListener('touchstart', (e) => {
+            _touchY = e.touches[0].clientY;
+        }, { passive: true });
+        menuOverlay.addEventListener('touchmove', (e) => {
+            const dy = _touchY - e.touches[0].clientY;
+            _touchY = e.touches[0].clientY;
+            window.scrollBy({ top: dy, behavior: 'instant' });
+        }, { passive: true });
+    }
+
+    // Klik di luar nav & hamburger juga tutup
     document.addEventListener('click', (e) => {
         if (navLinks.classList.contains('open') && !navLinks.contains(e.target) && !hamburger.contains(e.target)) {
-            navLinks.classList.remove('open');
-            if(menuOverlay) menuOverlay.classList.remove('show');
+            closeNav();
         }
     });
 
