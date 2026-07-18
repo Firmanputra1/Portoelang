@@ -872,6 +872,8 @@
             position: relative;
             transition: var(--transition);
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
         }
 
         .package-card.popular {
@@ -972,6 +974,7 @@
             cursor: pointer;
             text-decoration: none;
             transition: var(--transition);
+            margin-top: auto;
         }
 
         .btn-package.primary {
