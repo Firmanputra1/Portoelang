@@ -12,8 +12,8 @@ try {
     $kernel = $app->make(Illuminate\Contracts\Http\Kernel::class);
     echo "Kernel loaded.\n";
     
-    // Boot the application
-    $app->boot();
+    // Bootstrap the application correctly via Kernel
+    $kernel->bootstrap();
     echo "Application booted successfully!\n";
 } catch (\Throwable $e) {
     echo "\n--- CAUGHT EXCEPTION ---\n";
