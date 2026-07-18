@@ -1,0 +1,6 @@
+/vendor
+/node_modules
+.git
+.env
+sync_output.txt
+welcome_original.tmp
