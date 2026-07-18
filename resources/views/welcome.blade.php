@@ -7,7 +7,7 @@
     <title>ElangDesign - Jasa Desain Grafis </title>
     
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="{{ asset('images/favicon.PNG') }}">
+    <link rel="icon" type="image/png" href="{{ asset('images/favicon.png') }}">
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1541,7 +1541,7 @@
 <nav class="navbar" id="navbar">
     <div class="nav-inner">
         <a href="{{ route('home') }}" class="logo">
-            <img src="{{ asset('images/logoelang.SVG') }}" alt="ElangDesign Logo" width="40" height="40">
+            <img src="{{ asset('images/logoelang.svg') }}" alt="ElangDesign Logo" width="40" height="40">
             <span class="logo-text">ElangDesign</span>
         </a>
         <ul class="nav-links" id="navLinks">
