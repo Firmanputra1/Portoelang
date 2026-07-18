@@ -416,8 +416,42 @@
             color: #ef4444;
         }
 
+        .btn-toggle-sidebar {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            width: 42px;
+            height: 42px;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .btn-toggle-sidebar:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .sidebar-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            z-index: 99;
+            display: none;
+            transition: var(--transition);
+        }
+        .sidebar-overlay.show {
+            display: block;
+        }
+
         /* Responsive */
         @media (max-width: 991px) {
+            .btn-toggle-sidebar {
+                display: flex !important;
+            }
             .sidebar {
                 transform: translateX(-100%);
             }
@@ -428,11 +462,20 @@
                 margin-left: 0;
                 padding: 24px;
             }
+            .btn-visit-text {
+                display: none;
+            }
+            .main-header {
+                gap: 16px;
+            }
         }
     </style>
     @yield('styles')
 </head>
 <body>
+
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
     <!-- Sidebar -->
     <aside class="sidebar" id="sidebar">
@@ -507,14 +550,19 @@
     <main class="main-container">
         <!-- Header -->
         <header class="main-header">
-            <div class="header-title">
-                <h1>@yield('header_title', 'Dashboard')</h1>
-                <p>@yield('header_subtitle', 'Selamat datang di Panel Admin ElangDesign.')</p>
+            <div style="display: flex; align-items: center; gap: 16px;">
+                <button id="sidebarToggle" class="btn-toggle-sidebar" aria-label="Toggle Sidebar">
+                    <svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" width="24" height="24"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                </button>
+                <div class="header-title">
+                    <h1>@yield('header_title', 'Dashboard')</h1>
+                    <p>@yield('header_subtitle', 'Selamat datang di Panel Admin ElangDesign.')</p>
+                </div>
             </div>
 
             <div class="header-actions">
                 <a href="{{ route('home') }}" target="_blank" class="btn-visit">
-                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="16" height="16" style="margin-right: 4px; vertical-align: middle;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"></path></svg> Lihat Website
+                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="16" height="16" style="margin-right: 4px; vertical-align: middle;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"></path></svg> <span class="btn-visit-text">Lihat Website</span>
                 </a>
             </div>
         </header>
@@ -539,7 +587,21 @@
     </main>
 
     <script>
-        // Hamburger Menu toggle logic if responsive is needed
+        const sidebar = document.getElementById('sidebar');
+        const sidebarToggle = document.getElementById('sidebarToggle');
+        const sidebarOverlay = document.getElementById('sidebarOverlay');
+
+        if (sidebarToggle && sidebar && sidebarOverlay) {
+            sidebarToggle.addEventListener('click', () => {
+                sidebar.classList.add('open');
+                sidebarOverlay.classList.add('show');
+            });
+
+            sidebarOverlay.addEventListener('click', () => {
+                sidebar.classList.remove('open');
+                sidebarOverlay.classList.remove('show');
+            });
+        }
     </script>
     @yield('scripts')
 </body>
