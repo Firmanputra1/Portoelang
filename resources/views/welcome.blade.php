@@ -1715,7 +1715,11 @@
                  data-category="{{ $item->category }}"
                  style="transition-delay: {{ ($index % 3) * 0.1 }}s; {{ $index > 2 ? 'display: none;' : '' }}">
                 <div class="portfolio-img" style="background: linear-gradient(135deg, {{ $colors[$index % count($colors)] }})">
-                    <div class="portfolio-placeholder">{{ $emojis[$index % count($emojis)] }}</div>
+                    @if($item->image)
+                        <img src="{{ asset('storage/' . $item->image) }}" alt="{{ $item->title }}" style="width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0;">
+                    @else
+                        <div class="portfolio-placeholder">{{ $emojis[$index % count($emojis)] }}</div>
+                    @endif
                     <div class="portfolio-overlay">
                         <span class="portfolio-overlay-text">Lihat Detail →</span>
                     </div>
