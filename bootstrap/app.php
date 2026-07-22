@@ -15,5 +15,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->redirectUsersTo('/admin');
     })
     ->withExceptions(function (Exceptions $exceptions): void {
-        //
+        $exceptions->report(function (\Throwable $e) {
+            error_log('LARAVEL_CRITICAL_S3_ERROR: ' . $e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine());
+        });
     })->create();
