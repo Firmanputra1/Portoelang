@@ -30,7 +30,7 @@ class ClientController extends Controller
         $data['is_active'] = $request->has('is_active');
         $data['sort_order'] = $data['sort_order'] ?? 0;
         if ($request->hasFile('logo')) {
-            $data['logo'] = $request->file('logo')->store('clients', 'public');
+            $data['logo'] = $request->file('logo')->store('clients', config('filesystems.default') === 'local' ? 'public' : config('filesystems.default'));
         }
         Client::create($data);
         return redirect()->route('admin.clients.index')->with('success', 'Klien berhasil ditambahkan!');
@@ -52,7 +52,7 @@ class ClientController extends Controller
         $data['is_active'] = $request->has('is_active');
         $data['sort_order'] = $data['sort_order'] ?? 0;
         if ($request->hasFile('logo')) {
-            $data['logo'] = $request->file('logo')->store('clients', 'public');
+            $data['logo'] = $request->file('logo')->store('clients', config('filesystems.default') === 'local' ? 'public' : config('filesystems.default'));
         }
         $client->update($data);
         return redirect()->route('admin.clients.index')->with('success', 'Klien berhasil diperbarui!');

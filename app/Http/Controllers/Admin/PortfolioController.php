@@ -37,7 +37,7 @@ class PortfolioController extends Controller
         $data['sort_order'] = $data['sort_order'] ?? 0;
 
         if ($request->hasFile('image')) {
-            $data['image'] = $request->file('image')->store('portfolios', 'public');
+            $data['image'] = $request->file('image')->store('portfolios', config('filesystems.default') === 'local' ? 'public' : config('filesystems.default'));
         }
 
         Portfolio::create($data);
@@ -66,7 +66,7 @@ class PortfolioController extends Controller
         $data['sort_order'] = $data['sort_order'] ?? 0;
 
         if ($request->hasFile('image')) {
-            $data['image'] = $request->file('image')->store('portfolios', 'public');
+            $data['image'] = $request->file('image')->store('portfolios', config('filesystems.default') === 'local' ? 'public' : config('filesystems.default'));
         }
 
         $portfolio->update($data);

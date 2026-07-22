@@ -40,7 +40,7 @@ class ServiceController extends Controller
         $data['sort_order'] = $data['sort_order'] ?? 0;
 
         if ($request->hasFile('image')) {
-            $data['image'] = $request->file('image')->store('services', 'public');
+            $data['image'] = $request->file('image')->store('services', config('filesystems.default') === 'local' ? 'public' : config('filesystems.default'));
         }
 
         if (isset($data['features'])) {
@@ -76,7 +76,7 @@ class ServiceController extends Controller
         $data['sort_order'] = $data['sort_order'] ?? 0;
 
         if ($request->hasFile('image')) {
-            $data['image'] = $request->file('image')->store('services', 'public');
+            $data['image'] = $request->file('image')->store('services', config('filesystems.default') === 'local' ? 'public' : config('filesystems.default'));
         }
 
         if (isset($data['features'])) {

@@ -67,7 +67,7 @@
                 <tr class="table-row-element" data-title="{{ strtolower($portfolio->title) }}" data-category="{{ strtolower($portfolio->category) }}">
                     <td>
                         @if($portfolio->image)
-                            <img src="{{ Storage::url($portfolio->image) }}" alt="{{ $portfolio->title }}" style="width: 80px; height: 50px; object-fit: cover; border-radius: 6px; border: 1px solid var(--border);">
+                            <img src="{{ Storage::disk(config('filesystems.default') === 'local' ? 'public' : config('filesystems.default'))->url($portfolio->image) }}" alt="{{ $portfolio->title }}" style="width: 80px; height: 50px; object-fit: cover; border-radius: 6px; border: 1px solid var(--border);">
                         @else
                             <div style="width: 80px; height: 50px; background: rgba(255,255,255,0.05); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 10px; color: var(--text-muted); border: 1px solid var(--border);">
                                 Tanpa Foto
@@ -141,7 +141,7 @@
                 <!-- Image Area -->
                 <div style="position: relative; width: 100%; height: 160px; background: rgba(0,0,0,0.2);">
                     @if($portfolio->image)
-                        <img src="{{ Storage::url($portfolio->image) }}" alt="{{ $portfolio->title }}" style="width: 100%; height: 100%; object-fit: cover;">
+                        <img src="{{ Storage::disk(config('filesystems.default') === 'local' ? 'public' : config('filesystems.default'))->url($portfolio->image) }}" alt="{{ $portfolio->title }}" style="width: 100%; height: 100%; object-fit: cover;">
                     @else
                         <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 12px; color: var(--text-muted);">
                             Tanpa Foto

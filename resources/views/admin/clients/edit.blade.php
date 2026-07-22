@@ -48,7 +48,7 @@
         <div class="form-group">
             <label class="form-label">Logo Saat Ini:</label>
             <div style="margin-top: 8px;">
-                <img src="{{ Storage::url($client->logo) }}" alt="Logo Preview" style="max-width: 150px; max-height: 60px; object-fit: contain; background: rgba(255,255,255,0.02); padding: 6px; border-radius: 6px; border: 1px solid var(--border);">
+                <img src="{{ Storage::disk(config('filesystems.default') === 'local' ? 'public' : config('filesystems.default'))->url($client->logo) }}" alt="Logo Preview" style="max-width: 150px; max-height: 60px; object-fit: contain; background: rgba(255,255,255,0.02); padding: 6px; border-radius: 6px; border: 1px solid var(--border);">
             </div>
         </div>
         @endif

@@ -66,7 +66,7 @@
         <div class="form-group">
             <label class="form-label">Gambar Saat Ini:</label>
             <div style="margin-top: 8px;">
-                <img src="{{ Storage::url($portfolio->image) }}" alt="Preview" style="max-width: 200px; max-height: 150px; border-radius: 8px; border: 1px solid var(--border);">
+                <img src="{{ Storage::disk(config('filesystems.default') === 'local' ? 'public' : config('filesystems.default'))->url($portfolio->image) }}" alt="Preview" style="max-width: 200px; max-height: 150px; border-radius: 8px; border: 1px solid var(--border);">
             </div>
         </div>
         @endif

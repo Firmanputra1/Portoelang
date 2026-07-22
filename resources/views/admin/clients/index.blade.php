@@ -56,7 +56,7 @@
                 <tr class="table-row-element" data-name="{{ strtolower($client->name) }}">
                     <td>
                         @if($client->logo)
-                            <img src="{{ Storage::url($client->logo) }}" alt="{{ $client->name }}" style="max-width: 100px; max-height: 40px; object-fit: contain; background: rgba(255,255,255,0.02); padding: 4px; border-radius: 4px; border: 1px solid var(--border);">
+                            <img src="{{ Storage::disk(config('filesystems.default') === 'local' ? 'public' : config('filesystems.default'))->url($client->logo) }}" alt="{{ $client->name }}" style="max-width: 100px; max-height: 40px; object-fit: contain; background: rgba(255,255,255,0.02); padding: 4px; border-radius: 4px; border: 1px solid var(--border);">
                         @else
                             <div style="font-size: 11px; color: var(--text-muted);">Tidak ada logo</div>
                         @endif
@@ -126,7 +126,7 @@
                 <!-- Logo Container -->
                 <div style="width: 100%; height: 80px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; background: rgba(0,0,0,0.15); border-radius: 8px; border: 1px solid var(--border); padding: 8px;">
                     @if($client->logo)
-                        <img src="{{ Storage::url($client->logo) }}" alt="{{ $client->name }}" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+                        <img src="{{ Storage::disk(config('filesystems.default') === 'local' ? 'public' : config('filesystems.default'))->url($client->logo) }}" alt="{{ $client->name }}" style="max-width: 100%; max-height: 100%; object-fit: contain;">
                     @else
                         <span style="font-size: 12px; color: var(--text-muted); font-style: italic;">Tanpa Logo</span>
                     @endif
