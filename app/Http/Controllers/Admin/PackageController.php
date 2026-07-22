@@ -33,6 +33,8 @@ class PackageController extends Controller
 
         $data['is_active'] = $request->has('is_active');
         $data['is_popular'] = $request->has('is_popular');
+        $data['badge_color'] = $data['badge_color'] ?? '#4F46E5';
+        $data['sort_order'] = $data['sort_order'] ?? 0;
 
         if (isset($data['features'])) {
             $data['features'] = array_filter(array_map('trim', explode("\n", $data['features'])));
@@ -61,6 +63,8 @@ class PackageController extends Controller
 
         $data['is_active'] = $request->has('is_active');
         $data['is_popular'] = $request->has('is_popular');
+        $data['badge_color'] = $data['badge_color'] ?? '#4F46E5';
+        $data['sort_order'] = $data['sort_order'] ?? 0;
 
         if (isset($data['features'])) {
             $data['features'] = array_filter(array_map('trim', explode("\n", $data['features'])));

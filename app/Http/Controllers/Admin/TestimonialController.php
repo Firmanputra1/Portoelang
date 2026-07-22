@@ -30,6 +30,7 @@ class TestimonialController extends Controller
         ]);
 
         $data['is_active'] = $request->has('is_active');
+        $data['sort_order'] = $data['sort_order'] ?? 0;
 
         Testimonial::create($data);
         return redirect()->route('admin.testimonials.index')->with('success', 'Testimoni berhasil ditambahkan!');
@@ -51,6 +52,7 @@ class TestimonialController extends Controller
         ]);
 
         $data['is_active'] = $request->has('is_active');
+        $data['sort_order'] = $data['sort_order'] ?? 0;
 
         $testimonial->update($data);
         return redirect()->route('admin.testimonials.index')->with('success', 'Testimoni berhasil diperbarui!');

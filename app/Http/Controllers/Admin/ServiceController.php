@@ -36,6 +36,8 @@ class ServiceController extends Controller
 
         $data['slug'] = Str::slug($data['name']);
         $data['is_active'] = $request->has('is_active');
+        $data['icon'] = $data['icon'] ?? 'fa-paint-brush';
+        $data['sort_order'] = $data['sort_order'] ?? 0;
 
         if ($request->hasFile('image')) {
             $data['image'] = $request->file('image')->store('services', 'public');
@@ -70,6 +72,8 @@ class ServiceController extends Controller
 
         $data['slug'] = Str::slug($data['name']);
         $data['is_active'] = $request->has('is_active');
+        $data['icon'] = $data['icon'] ?? 'fa-paint-brush';
+        $data['sort_order'] = $data['sort_order'] ?? 0;
 
         if ($request->hasFile('image')) {
             $data['image'] = $request->file('image')->store('services', 'public');

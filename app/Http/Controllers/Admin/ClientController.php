@@ -28,6 +28,7 @@ class ClientController extends Controller
             'sort_order' => 'nullable|integer',
         ]);
         $data['is_active'] = $request->has('is_active');
+        $data['sort_order'] = $data['sort_order'] ?? 0;
         if ($request->hasFile('logo')) {
             $data['logo'] = $request->file('logo')->store('clients', 'public');
         }
@@ -49,6 +50,7 @@ class ClientController extends Controller
             'sort_order' => 'nullable|integer',
         ]);
         $data['is_active'] = $request->has('is_active');
+        $data['sort_order'] = $data['sort_order'] ?? 0;
         if ($request->hasFile('logo')) {
             $data['logo'] = $request->file('logo')->store('clients', 'public');
         }

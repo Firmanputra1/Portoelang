@@ -27,6 +27,7 @@ class FaqController extends Controller
             'sort_order' => 'nullable|integer',
         ]);
         $data['is_active'] = $request->has('is_active');
+        $data['sort_order'] = $data['sort_order'] ?? 0;
         Faq::create($data);
         return redirect()->route('admin.faqs.index')->with('success', 'FAQ berhasil ditambahkan!');
     }
@@ -44,6 +45,7 @@ class FaqController extends Controller
             'sort_order' => 'nullable|integer',
         ]);
         $data['is_active'] = $request->has('is_active');
+        $data['sort_order'] = $data['sort_order'] ?? 0;
         $faq->update($data);
         return redirect()->route('admin.faqs.index')->with('success', 'FAQ berhasil diperbarui!');
     }
