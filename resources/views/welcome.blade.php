@@ -1719,7 +1719,7 @@
                  style="transition-delay: {{ ($index % 3) * 0.1 }}s; {{ $index > 2 ? 'display: none;' : '' }}">
                 <div class="portfolio-img" style="background: linear-gradient(135deg, {{ $colors[$index % count($colors)] }})">
                     @if($item->image)
-                        <img src="{{ Storage::disk(config('filesystems.default') === 'local' ? 'public' : config('filesystems.default'))->url($item->image) }}" alt="{{ $item->title }}" style="width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0;">
+                        <img src="{{ (config('filesystems.default') === 'local' || config('filesystems.default') === 'public') ? asset('storage/' . $item->image) : Storage::disk(config('filesystems.default'))->url($item->image) }}" alt="{{ $item->title }}" style="width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0;">
                     @else
                         <div class="portfolio-placeholder">{{ $emojis[$index % count($emojis)] }}</div>
                     @endif
