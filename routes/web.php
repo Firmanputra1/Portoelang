@@ -17,27 +17,6 @@ Route::get('/', [MainController::class, 'index'])->name('home');
 Route::get('/portfolio', [MainController::class, 'portfolio'])->name('portfolio');
 Route::get('/contact', [MainController::class, 'contact'])->name('contact');
 
-Route::get('/test-s3-config', function () {
-    $s3 = config('filesystems.disks.s3');
-    $mask = function ($val) {
-        if (empty($val)) return '[EMPTY]';
-        if (strlen($val) <= 8) return '***';
-        return substr($val, 0, 4) . '...' . substr($val, -4);
-    };
-
-    return response()->json([
-        'default_disk' => config('filesystems.default'),
-        'driver' => $s3['driver'] ?? null,
-        'key' => $mask($s3['key'] ?? null),
-        'secret' => $mask($s3['secret'] ?? null),
-        'region' => $s3['region'] ?? null,
-        'bucket' => $s3['bucket'] ?? null,
-        'url' => $s3['url'] ?? null,
-        'endpoint' => $s3['endpoint'] ?? null,
-        'use_path_style_endpoint' => $s3['use_path_style_endpoint'] ?? null,
-    ]);
-});
-
 // Guest Auth Routes
 Route::middleware('guest')->group(function () {
     Route::get('/admin/login', [AuthController::class, 'showLoginForm'])->name('login');

@@ -611,6 +611,8 @@
             position: relative;
             overflow: hidden;
             cursor: pointer;
+            display: flex;
+            flex-direction: column;
         }
 
         .service-card::before {
@@ -718,6 +720,7 @@
             cursor: pointer;
             width: 100%;
             justify-content: center;
+            margin-top: auto;
         }
 
         .btn-service:hover {
